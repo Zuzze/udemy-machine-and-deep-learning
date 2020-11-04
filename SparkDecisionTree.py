@@ -4,6 +4,8 @@ from pyspark import SparkConf, SparkContext
 from numpy import array
 
 # Boilerplate Spark stuff:
+# This is a starting point to any Spark action
+# note that scikit/numpy won't be distributed, you need spark syntax to do that everywhere
 conf = SparkConf().setMaster("local").setAppName("SparkDecisionTree")
 sc = SparkContext(conf = conf)
 
@@ -40,8 +42,10 @@ def createLabeledPoints(fields):
         previousEmployers, educationLevel, topTier, interned]))
 
 #Load up our CSV file, and filter out the header line with the column names
+#sc  =  source context
 rawData = sc.textFile("PastHires.csv")
 header = rawData.first()
+# filter first row away
 rawData = rawData.filter(lambda x:x != header)
 
 # Split each line into a list based on the comma delimiters
@@ -67,6 +71,8 @@ model = DecisionTree.trainClassifier(trainingData, numClasses=2,
 # parameters and measure accuracy as you go!)
 predictions = model.predict(testData)
 print('Hire prediction:')
+
+# Spark figures out the best way to get into the given result based on data given
 results = predictions.collect()
 for result in results:
     print(result)
