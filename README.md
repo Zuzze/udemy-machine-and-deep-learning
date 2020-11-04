@@ -62,22 +62,31 @@ Multiple models solve same problem and vote on results
 - **_Bagging_** = multiple models trained by random subsets of data (bootstrap aggregating)
 - **_Boosting_** = each model boosts attributes that address data mis-classified by previous model, eg. XGBoost
 
-### Recommendation Systems
+##### Recommendation Systems
 
-#### User-based collaborative filtering
+### User-based collaborative filtering
 
 1. Compute similarity scores between users
 2. recommend stuff similar users liked and you haven’t seen yet
 
 Con: Peple’s taste changes, more people than things
 
-#### Item-based collaborative filtering
+### Item-based collaborative filtering
 
 1. Find every pair of e.g. movies that were watched by same person
 2. Measure similarity of ratings across all users who watched both
 3. Sort by movie by simlarity
 
 Pro: always same thing, fewer things than people => faster to compute
+
+### TF-IDF
+
+Term Frequency and Inverse Document Frequency: Important data for search, figures out what terms are most relevant for a document. Assumes document is a "Bag of words", no relationships/typos/tenses/synonyms between words taken into account
+
+- Term Frequency: how often word occurs in a document
+- Document Frequency: how often word occurs in a set of documents, e.g. all wikipedia pages, all websites etc
+- relevancy of a word to a document: Term Frequency / Document Frequency (How often a word appears in a document compared to appearance everywhere, avoids putting weight on words like a/the/and etc)
+- in practice we use log of IDF since word counts are distributed exponentially => better weighting with log
 
 ### Data mining techniques
 
@@ -87,16 +96,18 @@ Pro: always same thing, fewer things than people => faster to compute
 - Scaling/Normalization: some models work only when valuess normally distributed around 0
 - Shuffling: Shuffle training data
 
-## Big data
+### Big data
 
--
+- RDD: Resilient distributed datasets RDD
+  - Resilient: if cluster down it recovers itself, tries agai etc
+  - Distributed: distribute computing to cluster of computers instead of single CPU
 
 ### Data Warehousing
 
 - ELT: Extract-Load-Transform (processing happens in a tool, raw data directly loaded into system)
 - ETL: Extract-Transform-Load (preprocessing raw data before loading, old school way)
 
-## Scripts
+### Scripts
 
 Open jupyter notebook (make sure you are in the folder where .ipynb file is):
 

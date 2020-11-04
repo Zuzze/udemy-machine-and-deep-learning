@@ -7,14 +7,19 @@ conf = SparkConf().setMaster("local").setAppName("SparkTFIDF")
 sc = SparkContext(conf = conf)
 
 # Load documents (one per line).
+# create RDD, tsv file contains 1 wikipedia article on every line
 rawData = sc.textFile("subset-small.tsv")
 fields = rawData.map(lambda x: x.split("\t"))
+# extract body of a text and split it into list of words
 documents = fields.map(lambda x: x[3].split(" "))
 
 # Store the document names for later:
+# document names are on col i 1
 documentNames = fields.map(lambda x: x[1])
 
 # Now hash the words in each document to their term frequencies:
+# instead of using strings, map words to numbers using hash function
+# repressented as sparse vector (no NaN values)
 hashingTF = HashingTF(100000)  #100K hash buckets just to save some memory
 tf = hashingTF.transform(documents)
 
@@ -23,6 +28,7 @@ tf = hashingTF.transform(documents)
 
 # Let's compute the TF*IDF of each term in each document:
 tf.cache()
+# ignore words that won't appear at least twice
 idf = IDF(minDocFreq=2).fit(tf)
 tfidf = idf.transform(tf)
 
@@ -35,6 +41,7 @@ tfidf = idf.transform(tf)
 # First, let's figure out what hash value "Gettysburg" maps to by finding the
 # index a sparse vector from HashingTF gives us back:
 gettysburgTF = hashingTF.transform(["Gettysburg"])
+# extract scores dor every doc (hash value)
 gettysburgHashValue = int(gettysburgTF.indices[0])
 
 # Now we will extract the TF*IDF score for Gettsyburg's hash value into
@@ -43,6 +50,7 @@ gettysburgRelevance = tfidf.map(lambda x: x[gettysburgHashValue])
 
 # We'll zip in the document names so we can see which is which:
 zippedResults = gettysburgRelevance.zip(documentNames)
+
 
 # And, print the document with the maximum TF*IDF value:
 print("Best document for Gettysburg is:")
