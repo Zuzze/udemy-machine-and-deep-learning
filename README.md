@@ -5,15 +5,26 @@ Exercises are related to Udemy course instructed by Frank Kane (Amazon) from Sun
 ## Tools
 
 - Python
-- matplotlib
-- numpy
-- pandas
-- seaborn
-- anaconda
-- Jupyter Notebook
-- Spyder IDE
-- Apache Spark
-- TensorFlow
+- matplotlib (dataviz)
+- numpy (support for large multi-dimensional arrays and matrices)
+- scipy (scientific computing and technical computing)
+- pandas (data analysis and manipulation)
+- seaborn (fancy dataviz)
+- scikit learn (machine learning in Python)
+- anaconda (Python Data Science Platform)
+- Jupyter Notebook (create and share documents that contain live code)
+- Spyder (IDE shipped inside Anaconda)
+- Apache Spark (Tool for Big data)
+- TensorFlow (Machine learning tools)
+
+## Projects
+
+- Prediction of car prices based on features (Regression)
+- Movie recommendation system (Item-based Collaborative filtering)
+- Email Spam Blocker (Naive Bayes)
+- Wikipedia keyword search engine (TD-IDF)
+- CV filterer (Decision tree)
+- Taxi pickup and dropoff fastest route calculation (Q-Learning with Gym)
 
 ## Topics
 
@@ -108,7 +119,15 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
 - ELT: Extract-Load-Transform (processing happens in a tool, raw data directly loaded into system)
 - ETL: Extract-Transform-Load (preprocessing raw data before loading, old school way)
 
-### Scripts
+### Statictical tools:
+
+- T-test: difference between datasets relative to the variance in the data (higher T => real difference), e.g. revenue conversion
+- Fisher's exact test (e.g. clickthrough rates)
+- E-test (e.g. transaction per user)
+- chi-squared test (e.g. product quantities purchased)
+- P-value: low P-value => there is a real statistically significant difference, e.g. < 0.005
+
+## Scripts
 
 Open jupyter notebook (make sure you are in the folder where .ipynb file is):
 
