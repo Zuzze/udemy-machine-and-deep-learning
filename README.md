@@ -101,6 +101,7 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
 - RDD: Resilient distributed datasets RDD
   - Resilient: if cluster down it recovers itself, tries agai etc
   - Distributed: distribute computing to cluster of computers instead of single CPU
+- Dataframe: dataset of row objects, dataset knows types ahead of time => faster
 
 ### Data Warehousing
 
