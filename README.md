@@ -16,7 +16,7 @@ Exercises are related to Udemy course instructed by Frank Kane (Amazon) from Sun
 - Spyder (IDE shipped inside Anaconda)
 - Apache Spark (Tool for Big data)
 - TensorFlow (Machine learning tools)
-- Keras
+- Keras (part of Tensorflow to support neural networks out of the box, compatible with scikit-learn)
 
 ## Projects
 
