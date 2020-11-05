@@ -26,6 +26,10 @@ Exercises are related to Udemy course instructed by Frank Kane (Amazon) from Sun
 - Wikipedia keyword search engine (TD-IDF)
 - CV filterer (Decision tree)
 - Taxi pickup and dropoff fastest route calculation (Q-Learning with Gym)
+- Predict whether voter is Democrat or Republican based on data how voter has voted on different topics in the US (Keras, Sigmoid+Relu)
+- Handwriting recognition (CNN, Keras)
+- Predict whether user liked the movie based on review (RNN, Sentiment Analysis, Keras, IMDB data)
+- Holiday Image Recognition (Keras ResNet)
 
 ## Topics
 
@@ -133,13 +137,20 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
 - Gradient Descent (minimize error): Pick a random point and measure error until we found local minima of the error that is optimized, used to train neural network
 - Autodiff (find gradients for gradient descent): technique to speed up gradient descent by calculating partial derivatives in number of outputs (few outputs, many inputs)
 - Softmax (choose most probable classification): used for classification, produces probabilities for each class and highest probability is the answer, used e.g. face recognition
+- Learning Rate: start at random point, sample solutions (weights) seeking to minimize const function over many epochs => How far apart these samples are is the learning rate (is hyperparameter). Large learning rate can overshoot correct answer, small learning rate increase training time
+- Batch Size: how many samples within each epoch, smaller batch work their way out of local minima better than large ones => too large batch sizes can get stuck to local minima and give wrong solution
+- in deep learning there are 3 types of dataset:
+  - Training dataset: used to fit the data from the bottom up
+  - Evaluation dataset: evaluates data each epoch against evaluation dataset
+  - Testing dataset: used for fully trained model to test it
+- Often computationally expensive
 
 ### Neural Networks
 
 - **_Artificial Neuron_**: single unit in deep neural network, used with NOT/AND/OR operations that decide whether it will "fire" or not
 - **_LTU_**: Linear Threshold Unit, adds weight to input
 - **_Perceptron_**: layer of LTU's, create system that learns over time, cells that fire together wire together
-- **_Multi-layer perceptron_**: adds hidden layers, deep neural network
+- **_Multi-layer perceptron (MLP)_**: adds hidden layers, deep neural network
 - **_A modern deep neural network_**: apply softmax to output, train using gradient descent
 - **_Backpropagation_**: train MLP weights, gradient descent using reverse-mode autodiff
   1. compute output error
@@ -148,10 +159,39 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
   4. Tweak weights to reduce the error using gradient descent
 - **_Rectifier_**: Activation function, step function, e.g. ReLU (Rectifier Linear Unit)
 - **_Optimization function_**: faster optimizers than gradient descent, e.g. Momentum Optimization
-- Methods to avoid overfitting:
-  - early stopping when performance starts dropping
-  - regularization terms added to cost function
-  - dropout (ignore 50% of all neurons randomly)
+
+### Regularization: Methods to avoid overfitting
+
+- Sign when this is happening: high accuracy on training data, low on test and evaluation data
+- use simpler model with less layers/neurons
+- **_Dropout_**: ignore e.g. 50% of all neurons randomly while training is still ongoing, forces model to spread its learning, used often in CNN
+- **_Early stopping_** when performance starts dropping
+
+#### Convolutional Neural Networks (CNN)
+
+- Break data into chunks (= convolutions) and process those individually (=subsampling) and feed into higher layers
+- Find features that aren't in a specific spot (e.g. stop sign can be anywhere in the image)
+- Process:
+  1. Local receptive fields scan image looking for edges and pick up edges oof e.g. stop sign
+  2. Edges sent to higher level convolutions that identify more details (shape, letters etc)
+  3. shape matched against of pattern what stop sign looks like
+- Used e.g. Machine translation, sentence claassification, Sentiment analysis
+- Keras had Conv1D, Conv2D, Conv3D, typical usage: Conv2D => MaxPooling2D => dropout => flatten => dense => dropout => softmax
+- Multiple libraries/architectures vailable such as AlexNet, ResNet (Residual network), GoogLeNet
+- LSTM Cell: Long short-term memory cell, maintains separate short-term and long-term states to avoid dilution of states
+- GRU Cell: Gated Recurrent Unit, simplified LSTM Cell
+
+#### Recurrent Neural Network (RNN)
+
+- Sequences in data e.g. time series (web logs, stock trades)
+- Sequences of arbitrary length e.g. Machine Translation, Image Captions, Machine-generated music
+- also feeds data back, not just passing through the neuron
+- past behaviour of neuron influences its new behaviour in next sequence (aka memory cell)
+- RNN Topologies:
+  - Sequence to sequence: predict price based on series of historical data
+  - Sequence to vector: words in a sentence to sentiment
+  - Vector to sequence: create captions from an image
+  - encoder => decoder: sequence => vector => sequence, machine translation
 
 ### Tensorflow
 
@@ -163,6 +203,11 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
   3. execute graph (nothing happens until then)
 - Neural networks usually work best with normalized data (sklearn StandardScaler)
 - Play around with neural networks at [http://playground.tensorflow.org/](http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.11043&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
+
+### Transfer Learning
+
+- Reusing trained models as they are or tune them to applications
+- You can find existing models from Model Zoos, e.g. Caffe Model Zoo
 
 ## Scripts
 
