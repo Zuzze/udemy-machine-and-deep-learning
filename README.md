@@ -16,6 +16,7 @@ Exercises are related to Udemy course instructed by Frank Kane (Amazon) from Sun
 - Spyder (IDE shipped inside Anaconda)
 - Apache Spark (Tool for Big data)
 - TensorFlow (Machine learning tools)
+- Keras
 
 ## Projects
 
@@ -119,7 +120,7 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
 - ELT: Extract-Load-Transform (processing happens in a tool, raw data directly loaded into system)
 - ETL: Extract-Transform-Load (preprocessing raw data before loading, old school way)
 
-### Statictical tools:
+### Statictical tools
 
 - T-test: difference between datasets relative to the variance in the data (higher T => real difference), e.g. revenue conversion
 - Fisher's exact test (e.g. clickthrough rates)
@@ -127,9 +128,45 @@ Term Frequency and Inverse Document Frequency: Important data for search, figure
 - chi-squared test (e.g. product quantities purchased)
 - P-value: low P-value => there is a real statistically significant difference, e.g. < 0.005
 
+## Deep Learning
+
+- Gradient Descent (minimize error): Pick a random point and measure error until we found local minima of the error that is optimized, used to train neural network
+- Autodiff (find gradients for gradient descent): technique to speed up gradient descent by calculating partial derivatives in number of outputs (few outputs, many inputs)
+- Softmax (choose most probable classification): used for classification, produces probabilities for each class and highest probability is the answer, used e.g. face recognition
+
+### Neural Networks
+
+- **_Artificial Neuron_**: single unit in deep neural network, used with NOT/AND/OR operations that decide whether it will "fire" or not
+- **_LTU_**: Linear Threshold Unit, adds weight to input
+- **_Perceptron_**: layer of LTU's, create system that learns over time, cells that fire together wire together
+- **_Multi-layer perceptron_**: adds hidden layers, deep neural network
+- **_A modern deep neural network_**: apply softmax to output, train using gradient descent
+- **_Backpropagation_**: train MLP weights, gradient descent using reverse-mode autodiff
+  1. compute output error
+  2. compute how much each neuron in the previous hidden layer contributed
+  3. Backpropagate that error in a reverse pass
+  4. Tweak weights to reduce the error using gradient descent
+- **_Rectifier_**: Activation function, step function, e.g. ReLU (Rectifier Linear Unit)
+- **_Optimization function_**: faster optimizers than gradient descent, e.g. Momentum Optimization
+- Methods to avoid overfitting:
+  - early stopping when performance starts dropping
+  - regularization terms added to cost function
+  - dropout (ignore 50% of all neurons randomly)
+
+### Tensorflow
+
+- Tool to optimize the processing of graph and distribute processing across network, can be run outside datacenters too, in phone for example
+- tensor: name for an array or matrix of values
+- Tensorflow steps:
+  1. construct graph to compute tensors
+  2. Initialize variables
+  3. execute graph (nothing happens until then)
+- Neural networks usually work best with normalized data (sklearn StandardScaler)
+- Play around with neural networks at [http://playground.tensorflow.org/](http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.11043&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false)
+
 ## Scripts
 
-Open jupyter notebook (make sure you are in the folder where .ipynb file is):
+Open jupyter notebook (make sure you are in the folder where .ipynb file is, to run code inside noteboof press shift+enter):
 
 ```
 jupyter notebook
@@ -145,4 +182,24 @@ Open anaconda's own IDE Spyder
 
 ```
 spyder
+```
+
+Set up an Anaconda environment for tensorflow (supports currently only Python 3.7)
+
+```
+conda create -n py37 tensorflow python=3.7
+```
+
+Run jupyter with Tensorflow compatible env
+
+```
+conda activate py37
+conda install jupyter
+jupyter notebook
+```
+
+Exit Python 3.7 environment and get back to 3.8
+
+```
+conda deactivate
 ```
