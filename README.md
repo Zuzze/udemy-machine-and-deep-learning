@@ -30,6 +30,7 @@ Exercises are related to Udemy course instructed by Frank Kane (Amazon) from Sun
 - Handwriting recognition (CNN, Keras)
 - Predict whether user liked the movie based on review (RNN, Sentiment Analysis, Keras, IMDB data)
 - Holiday Image Recognition (Keras ResNet)
+- Supervised learning for belign/malignant cancer tumours using variety of different methods and comparing them together
 
 ## Topics
 
